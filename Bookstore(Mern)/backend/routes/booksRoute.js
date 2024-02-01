@@ -1,88 +1,82 @@
-import express from 'express';
-import { Book } from '../models/bookModel.js'
 
-const router = express.Router();
+// const router = express.Router();
 
 
-//Get all books
-router.get('/', async (req, res) => {
-    try {
-        const books = await Book.find({});
+// //find by category
+// app.get("/allBooks", async (req, res) => {
+//     try {
+//         let query = {};
+//         if (req.query?.category) {
+//             query = { category: req.query.category }
+//         }
+//         const result = await bookCollections.find(query).toArray();
+//         return res.status(200).send(result);
+//     } catch (err) {
+//         console.log(err.message);
+//         res.status(500).send({ message: err.message });
+//     }
+// })
 
-        return res.status(200).json({
-            count: books.length,
-            data: books
-
-        });
-    } catch (err) {
-        console.log(err.message);
-        res.status(500).send({ message: err.message });
-    }
-})
 
 
-// Creating new book
-router.post('/', async (req, res) => {
-    try {
-        console.log(req.body)
-        if (!req.body.title || !req.body.author || !req.body.publishYear) {
-            return res.status(400).send({
-                message: "Please send all required fields"
-            })
-        }
-        const newBook = {
-            title: req.body.title,
-            author: req.body.author,
-            publishYear: req.body.publishYear
-        }
-        console.log(newBook)
-        const book = await Book.create(newBook);
+// // //get all books
+// // app.get("/books/allBooks", async (req, res) => {
+// //     try {
+// //         const books = await bookCollections.find();
+// //         const result = await books.toArray();
+// //         return res.status(200).send(result);
+// //     } catch (err) {
+// //         console.log(err.message);
+// //         res.status(500).send({ message: err.message });
+// //     }
+// // })
+// //create one book
+// app.post('/createBook', async (req, res) => {
+//     try {
+//         const newBook = req.body;
+//         const book = await bookCollections.insertOne(newBook);
+//         return res.status(201).send(book);
+//     } catch (err) {
+//         console.log(err.message);
+//         res.status(500).send({ message: err.message });
+//     }
+// })
+// //update book
+// app.patch('/updateBook/:id', async (req, res) => {
+//     try {
 
-        return res.status(201).send(book);
-    } catch (err) {
-        console.log(err.message);
-        res.status(500).send({ message: err.message });
-    }
-})
+//         const { id } = req.params;
+//         const filter = { _id: new ObjectId(id) };
+//         const newData = req.body;
+//         const updateBook = {
+//             $set: { ...newData }
+//         }
+//         const option = { upsert: true };
 
-// Update book
-router.put('/:id', async (req, res) => {
-    try {
+//         const newBook = await bookCollections.updateOne(filter, updateBook, option);
 
-        if (!req.body.title || !req.body.author || !req.body.publishYear) {
-            return res.status(400).send({
-                message: "Please send all required fields"
-            })
-        }
-        const { id } = req.params;
-        const book = await Book.findByIdAndUpdate(id, req.body);
-        if (!book) {
-            return res.status(404).json({ message: 'Book not found' });
-        }
+//         return res.status(201).send(newBook);
+//     } catch (err) {
+//         console.log(err.message);
+//         res.status(500).send({ message: err.message });
+//     }
+// })
 
-        return res.status(200).send({ message: 'Book update successfully' });
-    } catch (err) {
-        console.log(err.message);
-        res.status(500).send({ message: err.message });
-    }
-})
+// //delete book
+// app.delete('/deleteBook/:id', async (req, res) => {
+//     try {
 
-//deletebook
-router.delete('/:id', async (req, res) => {
-    try {
+//         const { id } = req.params;
+//         const filter = { _id: new ObjectId(id) };
+//         const obsoleteBook = await bookCollections.deleteOne(filter);
 
-        const { id } = req.params;
-        const book = await Book.findByIdAndDelete(id);
-        if (!book) {
-            return res.status(404).json({ message: 'Book not found' });
-        }
+//         return res.status(201).send(obsoleteBook);
+//     } catch (err) {
+//         console.log(err.message);
+//         res.status(500).send({ message: err.message });
+//     }
+// })
 
-        return res.status(200).send({ message: 'Book deleted successfully' });
-    } catch (err) {
-        console.log(err.message);
-        res.status(500).send({ message: err.message });
-    }
 
-})
 
-export default router;
+// export default router;
