@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+.pagecontainer {
+    width: 100vw;
+    min-height: 100vh;
+    background-color: #fff;
+    transition: 0.5s;
+}
+
+.pagecontainerr.black {
+    background-color: #222;
+} */
